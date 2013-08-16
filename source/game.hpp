@@ -1,0 +1,55 @@
+#ifndef __GAME_HPP_
+#define __GAME_HPP_
+
+/**
+* The main class that runs the main loop
+* Contains pointers to all manager classes and asks them to work
+* during each loop
+*/
+
+#include <memory>
+#include "typedefs.hpp"
+#include <SFML/Graphics.hpp>
+
+class Game
+{
+private:
+    // Manager classes
+    DataStoragePtr datastorage;
+    ConfigReaderPtr configreader;
+    InputPtr input;
+    ToolboxPtr toolbox;
+    SceneHandlerPtr scenehandler;
+    AudioPtr audiohandler;
+
+    // Game's current state
+    GameState gamestate;
+
+    // SFML stuff
+    RenderWindowPtr renderwindow;
+    bool sfml_is_open;
+    unsigned int framerate;
+    sf::Vector2i resolution;
+
+public:
+    Game();
+    int start();
+    int exit();
+    int mainloop();
+
+    bool isRunning();
+
+    void setResolution(sf::Vector2i r);
+    sf::Vector2i getResolution();
+    DataStoragePtr getDataStorage();
+    ConfigReaderPtr getConfigReader();
+    ToolboxPtr getToolbox();
+    GameState getGameState();
+    RenderWindowPtr getRenderWindow();
+    SceneHandlerPtr getSceneHandler();
+    AudioPtr getAudioHandler();
+};
+
+extern Game game;
+
+#endif
