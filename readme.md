@@ -27,13 +27,13 @@ Copy SFML .dlls from the SFML directory in your project folder, build and run. I
 
 TODO: add cmakelists
 
-Enter game's source directory
-mkdir build
-cd build
-cmake ..
-make
-cp -r ../data ./
-./game_binary_here
+* Enter game's source directory
+* mkdir build
+* cd build
+* cmake ..
+* make
+* cp -r ../data ./
+* ./game_binary_here
 
 
 ### OS X
