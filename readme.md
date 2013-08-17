@@ -33,6 +33,18 @@ Copy SFML .dlls from the SFML directory in your project folder, build and run. I
 * cp -r ../data ./
 * ./game_binary_here
 
+### Linux SFML 2.X
+
+Many distros stil have SFML 1.6 in their package management. Easiest way to get SFML 2 is to compile it from source.
+
+* Download source at http://www.sfml-dev.org/download/sfml/2.1/
+* unzip, enter directory
+* mkdir build && cd build
+* cmake ..
+* make
+* sudo make install
+* Now you should be able to compile the engine normally
+
 
 ### OS X
 
