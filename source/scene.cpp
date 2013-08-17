@@ -17,8 +17,6 @@ void Scene::work()
 {
     scenetime++;
 
-    game.getRenderWindow()->setView(*mainview);
-
     // Do things that the game does on each loop
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)
     {
@@ -34,7 +32,8 @@ void Scene::work()
 
 void Scene::init()
 {
-    mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  600.0*aspect_ratio, 600)));
+    // Initialize a camera view by taking the game's y resolution, and multiplying that by aspect ratio for x size
+    mainview = ViewPtr(new sf::View(sf::FloatRect(0, 0,  game.getResolution().y*aspect_ratio, game.getResolution().y)));
     initialized = true;
 
     // For derps, play a sound
@@ -43,6 +42,7 @@ void Scene::init()
 
 void Scene::render()
 {
+    game.getRenderWindow()->setView(*mainview);
     // March through the graphics container and render graphics
     for (auto iter = graphics.begin(); iter != graphics.end(); iter++)
     {
@@ -75,30 +75,10 @@ void Scene::appendGraphics(SpritePtr s)
 }
 
 /**
-* When the window is resized, also tweak our sf::view
+* When the window is resized
 */
 void Scene::onWindowResize()
 {
-    /**
-    * Manage aspect ratio. As the user resizes the window, we still want to display only
-    * what is supposed to be seen. Resizing the window should not to:
-    * 1) stretch pixels
-    * 2) show more scene
-    *
-    * The first problem is obvious - it's ugly
-    * The second is to make sure that any display area related things such as secrets hidden a few blocks
-    * outside the usual "view area" won't be spoiled
-    */
-
-    display_area.y = game.getRenderWindow()->getSize().y;
-    display_area.x = display_area.y*aspect_ratio;
-
-    display_ratio.x = display_area.x/game.getRenderWindow()->getSize().x;
-    display_ratio.y = display_area.y/game.getRenderWindow()->getSize().y;
-    display_offset.y = -1 * display_ratio.x + 1;
-    display_offset.y = -1 * display_ratio.y + 1;   
-
-    mainview->setViewport(sf::FloatRect(display_offset.x/2.0, display_offset.y/2.0, 1.0 - display_offset.x, 1.0 - display_offset.y));
 }
 
 
