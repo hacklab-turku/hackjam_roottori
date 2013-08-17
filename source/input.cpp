@@ -20,7 +20,7 @@ void Input::handleinput()
         switch (e.type)
         {
             case sf::Event::Closed:
-                game.exit();
+                game.signalGameExit();
                 break;
             case sf::Event::Resized:
                 game.getSceneHandler()->getActiveScene()->onWindowResize();
@@ -38,7 +38,7 @@ void Input::handleinput()
                 {
                     case sf::Keyboard::Escape:
                         // What happens on key press
-                        game.exit();
+                        game.signalGameExit();
                         break;
                 }
             break;

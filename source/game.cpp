@@ -56,7 +56,7 @@ int Game::start()
     if (scenehandler->init() != 0)
         return -1;
 
-    sfml_is_open = true;
+    running = true;
     return 0;
 }
 
@@ -67,7 +67,6 @@ int Game::exit()
     // Close SFML itself
     if (renderwindow->isOpen())
         renderwindow->close();
-    sfml_is_open = false;
 
     // Close systems that don't refer to SFML
 
@@ -111,6 +110,8 @@ int Game::mainloop()
         gamestate = GameState::GameState_Rendering;
         if (renderwindow->isOpen())
             renderwindow->display();
+
+        loopend();
     }
 
     return 0;
@@ -118,9 +119,21 @@ int Game::mainloop()
 
 bool Game::isRunning()
 {
-    if (sfml_is_open)
-        return true;
-    return false;
+    return running;
+}
+
+/**
+* Tell we wish to close the game at next loop
+*/
+void Game::signalGameExit()
+{
+    running = false;
+}
+
+void Game::loopend()
+{
+    if (running == false)
+        exit();
 }
 
 void Game::setResolution(sf::Vector2i r) { resolution = r; }

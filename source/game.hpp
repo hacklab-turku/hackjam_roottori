@@ -27,7 +27,7 @@ private:
 
     // SFML stuff
     RenderWindowPtr renderwindow;
-    bool sfml_is_open;
+    bool running;
     unsigned int framerate;
     sf::Vector2i resolution;
 
@@ -37,8 +37,10 @@ public:
     int exit();
     int mainloop();
 
+    void loopend();
     bool isRunning();
 
+    void signalGameExit();
     void setResolution(sf::Vector2i r);
     sf::Vector2i getResolution();
     DataStoragePtr getDataStorage();
