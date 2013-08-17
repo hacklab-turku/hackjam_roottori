@@ -31,6 +31,7 @@ Copy SFML .dlls from the SFML directory in your project folder, build and run. I
 * cmake ..
 * make
 * cp -r ../data ./
+* cp ../config.txt ./
 * ./game_binary_here
 
 ### Linux SFML 2.X
