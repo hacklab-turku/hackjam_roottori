@@ -3,7 +3,7 @@ set(CMAKE_CXX_COMPILER g++)
 project(game_project)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-find_package(SFML COMPONENTS graphics audio window system)
+find_package(SFML 2 COMPONENTS graphics audio window system)
 include_directories(${SFML_INCLUDE_DIR})
 
 add_definitions(-std=c++0x -g)
